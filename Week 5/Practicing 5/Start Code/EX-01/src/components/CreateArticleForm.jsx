@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function ArticleForm() {
+export default function CreateArticleForm() {
   const [form, setForm] = useState({
     title: '',
     content: '',

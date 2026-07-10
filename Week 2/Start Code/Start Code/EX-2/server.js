@@ -7,24 +7,6 @@ const server = http.createServer((req, res) => {
 
     console.log(`Received ${method} request for ${url}`);
 
-    // if (url === '/' && method === 'GET') {
-    //     res.writeHead(200, { 'Content-Type': 'text/html' });
-    //     return res.end(`
-    //         <html>
-    //             <head><title>Home</title></head>
-    //             <body>
-    //                 <h1>Welcome to the Home Page</h1>
-    //                 <p>This is a simple Node.js server.</p>
-    //             </body>
-    //         </html>
-    //     `);
-    // }
-    // // Implement more routes here
-    // else {
-    //     res.writeHead(404, { 'Content-Type': 'text/plain' });
-    //     return res.end('404 Not Found');
-    // }
-
     switch (`${method} ${url}`) {
         case 'GET /':
             res.writeHead(200, { 'Content-Type': 'text/html' });

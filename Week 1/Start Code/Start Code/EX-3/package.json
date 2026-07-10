@@ -1,16 +1,14 @@
 {
-  "name": "w1",
+  "name": "w1-ex3",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "main_init.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "init": "node main_init.js",
+    "load": "node main_load.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "express": "^5.2.1"
-  }
+  "description": ""
 }

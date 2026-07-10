@@ -30,12 +30,11 @@ export class RaceResult {
      * @param {Duration} duration 
      * @param {Array} result 
      */
-     constructor(id = "", sportType = "", duration = 0){
-          this._participantID = id;
-          this._sportType = sportType;
-          this._duration = duration;
-         
-     }  
+      constructor(id = "", sportType = "", duration = null){
+           this._participantID = id;
+           this._sportType = sportType;
+           this._duration = duration ?? new Duration();
+      }
 
      
   }

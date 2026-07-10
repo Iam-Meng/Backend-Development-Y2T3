@@ -48,7 +48,11 @@ export default function UpdateArticleForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <nav style={{ marginBottom: '20px' }}>
+        <Link to="/">← Back to Articles</Link>
+      </nav>
+      <form onSubmit={handleSubmit}>
       <h3>Update Article</h3>
       <input name="title" value={form.title} onChange={handleChange} placeholder="Title" required /><br />
       <textarea name="content" value={form.content} onChange={handleChange} placeholder="Content" required /><br />

@@ -46,15 +46,18 @@ export class RaceResultsService {
    * @returns {boolean} True if loading was successful, false otherwise.
    */
   loadFromFile(filePath) {
-    // TODO
     try {
       const data = fs.readFileSync(filePath, 'utf8');
-      this._raceResults = JSON.parse(data);
+      const parsed = JSON.parse(data);
+      this._raceResults = parsed.map(r => new RaceResult(
+        r.participantID,
+        r.sportType,
+        Duration.fromMinutesAndSeconds(...r.duration.replace('m ', ',').replace('s', '').split(',').map(Number))
+      ));
     }
     catch (error){
-      console.error("Error loading file:", error);  
+      console.error("Error loading file:", error);
     }
-    
   }
 
   /**

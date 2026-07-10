@@ -7,7 +7,7 @@ export default function ArticleFilter() {
   const [categories, setCategories] = useState([]);
   const [selectedJournalist, setSelectedJournalist] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  // Fetch all articles when component mounts
+
   useEffect(() => {
     fetchArticles();
     fetchJournalists();
@@ -15,7 +15,6 @@ export default function ArticleFilter() {
   }, []);
 
   const fetchArticles = async () => {
-    // Fetch articles from the API
     try {
       const response = await axios.get('http://localhost:5000/articles');
       setArticles(response.data);
@@ -25,7 +24,6 @@ export default function ArticleFilter() {
   };
 
   const fetchJournalists = async () => {
-    // Fetch journalists from the API
     try {
       const response = await axios.get('http://localhost:5000/journalists');
       setJournalists(response.data);
@@ -35,13 +33,23 @@ export default function ArticleFilter() {
   };
 
   const fetchCategories = async () => {
-    // Fetch categories from the API
     try {
       const response = await axios.get('http://localhost:5000/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
+  };
+
+  const applyFilters = () => {
+    let result = articles;
+    if (selectedJournalist) {
+      result = result.filter(article => article.journalistId == selectedJournalist);
+    }
+    if (selectedCategory) {
+      result = result.filter(article => article.categoryId == selectedCategory);
+    }
+    setArticles(result);
   };
 
   return (
@@ -64,44 +72,15 @@ export default function ArticleFilter() {
           ))}
         </select>
 
+        <button onClick={applyFilters}>Apply Filters</button>
         <button
           onClick={() => {
-            // Logic to apply filters - Bonus: combine filters
-            if (selectedJournalist && selectedCategory) {
-              const filtered = articles.filter(article => 
-                article.journalistId == selectedJournalist && article.categoryId == selectedCategory
-              );
-              setArticles(filtered);
-            } else if (selectedJournalist) {
-              const filtered = articles.filter(article => article.journalistId == selectedJournalist);
-              setArticles(filtered);
-            } else if (selectedCategory) {
-              const filtered = articles.filter(article => article.categoryId == selectedCategory);
-              setArticles(filtered);
-            }
-          }}
-        >Apply Filters</button>
-        <button
-          onClick={() => {
-            // Logic to reset filters
             fetchArticles();
             setSelectedJournalist('');
             setSelectedCategory('');
           }}
         >Reset Filters</button>
       </div>
-      
-      <ul>
-        {articles.map(article => (
-          <li key={article.id}>
-            <strong>{article.title}</strong> <br />
-            <small>By Journalist #{article.journalistId} | Category #{article.categoryId}</small><br />
-            <button disabled>Delete</button>
-            <button disabled>Update</button>
-            <button disabled>View</button>
-          </li>
-        ))}
-      </ul>
 
       <ul>
         {articles.map(article => (
